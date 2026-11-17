@@ -1,0 +1,24 @@
+groups:
+  - name: cloudlab-training
+    interval: 30s
+    rules:
+      - alert: CloudLabApplicationDown
+        expr: up{job="cloudlab-app"} == 0
+        for: 1m
+        labels: {severity: critical}
+        annotations: {summary: 'Recovery lab app is unreachable'}
+      - alert: CloudLabPrimaryDatabaseUnavailable
+        expr: cloudlab_db_up{target="primary"} == 0
+        for: 1m
+        labels: {severity: warning}
+        annotations: {summary: 'Primary database connection test failing'}
+      - alert: CloudLabNoRecentBackup
+        expr: time() - cloudlab_last_backup_timestamp_seconds > 900
+        for: 2m
+        labels: {severity: warning}
+        annotations: {summary: 'Last logical backup is older than 15 minutes'}
+      - alert: CloudLabSimulatedOutage
+        expr: cloudlab_simulated_primary_outage == 1
+        for: 30s
+        labels: {severity: info}
+        annotations: {summary: 'Teaching simulation of application primary outage is active'}

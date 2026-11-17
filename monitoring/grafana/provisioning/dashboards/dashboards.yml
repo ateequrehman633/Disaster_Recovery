@@ -1,0 +1,11 @@
+apiVersion: 1
+providers:
+  - name: CloudLab Recovery Dashboards
+    orgId: 1
+    folder: Day 48 · Backup & Recovery
+    folderUid: cloudlab-day48
+    type: file
+    disableDeletion: true
+    updateIntervalSeconds: 20
+    options:
+      path: /var/lib/grafana/dashboards

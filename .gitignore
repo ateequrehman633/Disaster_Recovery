@@ -1,0 +1,5 @@
+.env
+.lab-credentials
+*.log
+__pycache__/
+*.pyc
